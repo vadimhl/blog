@@ -92,6 +92,15 @@ describe( 'blog list',  () => {
       )
       .expect(400);
   })  
+  test('put', async () => {
+    const resp1 = await api.get('/api/blogs/5a422b3a1b54a676234d17f9');
+    await api
+      .put('/api/blogs/5a422b3a1b54a676234d17f9')
+      .send( { likes: resp1.body.likes + 1 } )
+      .expect(200)
+    const resp2 = await api.get('/api/blogs/5a422b3a1b54a676234d17f9');
+    expect( resp2.body.likes).toBe(resp1.body.likes + 1 );
+  })
   test ('delete', async () => {
     await api
       .delete('/api/blogs/5a422b3a1b54a676234d17f9')
