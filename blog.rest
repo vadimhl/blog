@@ -1,0 +1,33 @@
+#@host = blog.1vadimhladchenko.repl.co
+@host = 3000-copper-peacock-recgkxr0.ws-eu18.gitpod.io
+@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_d64e9aa9-55ab-4c27-848c-d715d13e896b_owner_=dK4_iq-cVT7xWNKFNnquUkocKn2lcKm-; _gitpod_io_ws_0d801d4d-87ef-4bd3-8d07-d75b7e330a07_owner_=PUOlbjl96EExs6oyZYP2rYLVCls2dJn4; _gitpod_io_ws_0e03ec1a-c3fc-47a3-81c1-9832169395c1_owner_=GkVQ_2HN6dgLRspmOAfoq7ez0Rni1FIb
+###
+GET https://{{host}}/api/blogs/
+cookie: {{cookie}}
+###
+GET https://{{host}}/api/blogs/w61547aadd8c80c69a748e944
+###
+POST https://{{host}}/api/blogs/
+Content-Type: application/json
+cookie: {{cookie}}
+
+{
+  "title": "Test2",
+  "author": "None 222",
+  "url": "127.0.0.2",
+  "likes": "2"
+}
+###
+PUT https://{{host}}/api/blogs/615571b043352a3550187f3e
+Content-Type: application/json
+cookie: {{cookie}}
+
+{
+
+  "likes": "1"
+}
+###
+DELETE https://{{host}}/api/blogs/6155b81a8727ff5818fe746b
+cookie: {{cookie}}
+
+
