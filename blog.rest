@@ -1,6 +1,6 @@
 #@host = blog.1vadimhladchenko.repl.co
 @host = 3000-copper-peacock-recgkxr0.ws-eu18.gitpod.io
-@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_5a5fec1a-c355-405e-807d-28847faeeb91_owner_=nwiie89L4yqTZD21ojMpZIhwOMSB0UTU; _gitpod_io_ws_5c754dc5-5a06-4b88-82cf-3962ba98b435_owner_=s5NV8xVBxgpWSFQtTT-LspZ7X8Dyb7JT; _gitpod_io_ws_256c9eec-98b2-413f-b4a6-fa04313f37a5_owner_=JfpVITVv2gt3u5fjRkWRqsG9oHPve--G
+@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_30bd81c6-1654-4d3c-b6e6-5256d1b9b6b9_owner_=kSyugCJy1A0P6Ml8bXSZ7ZNIh7Z6El9Q; _gitpod_io_ws_d1549758-af6a-439b-bad8-0e7afdea9c94_owner_=Bzm5DGW0gH_ndm5iVywE.BbZsQXDNypQ; _gitpod_io_ws_f98462a1-be20-4222-a58a-00c5845f3f63_owner_=7uYw.xcStArbJXJT803KL7ArMGh39dN5
 ###
 GET https://{{host}}/api/blogs/
 cookie: {{cookie}}
@@ -44,4 +44,12 @@ cookie: {{cookie}}
 DELETE https://{{host}}/api/blogs/6155b81a8727ff5818fe746b
 cookie: {{cookie}}
 
+###
+POST https://{{host}}/api/login/
+Content-Type: application/json
+cookie: {{cookie}}
 
+{
+  "username" : "user",
+  "password" : "qwerty"
+}
