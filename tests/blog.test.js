@@ -2,15 +2,16 @@ const supertest = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../app');
 const Blog = require('../models/blog');
+const User = require('../models/user');
 const helper = require('./test_helper');
 const api = supertest(app);
-
+let userId ;
 describe( 'blog list',  () => {
   beforeEach( async () => {
+    const user = await User.findOne({});
     await Blog.deleteMany({});
-
-    const blogObjects = helper.testBlogs.map ( blog => new Blog(blog));
-    const promiseArr = blogObjects.map( bo => bo.save());
+    const blogObjects = helper.testBlogs.map ( blog => new Blog({...blog, user: user._id}));
+    const promiseArr = blogObjects.map( bo => bo.save() );
     await Promise.all(promiseArr)
   })
   test ( 'json', async () => {
@@ -111,7 +112,9 @@ describe( 'blog list',  () => {
     expect(response.body.map( bl => bl.title ))
     .not.toContain('Canonical string reduction');
   })
+  
 })
-afterAll(() => {
-  mongoose.connection.close()
+afterAll( () => {
+    mongoose.connection.close();
+  
 })

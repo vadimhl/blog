@@ -1,0 +1,16 @@
+[
+    {
+        "username": "user",
+        "passwordHash": "$2b$10$JD.cFHrwnAUNeyjWFiobC.AntTI37stWrdbnBtlJPvoJOMrXbpix6",
+        "name": "Test user",
+        "blogs": [
+            {
+                "title": "Test user 2",
+                "author": "user",
+                "url": "127.0.0.2",
+                "id": "615af9da437ebaef4a7e8349"
+            }
+        ],
+        "id": "615af8372588efb86d2447fa"
+    }
+]
