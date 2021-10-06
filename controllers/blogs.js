@@ -5,14 +5,6 @@ const logger = require('../utils/logger');
 const jwt = require('jsonwebtoken');
 
 
-const getToken = request => {
-  const authorization = request.get('authorization');
-  if ( authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7);
-  }
-  return null;
-}
-
 blogsRouter.get('/', async (request, response, next) => {
   try {
     const blogs = await Blog.find({}).populate('user', {name: 1, username:1});
@@ -36,17 +28,11 @@ blogsRouter.get('/:id', async (request, response, next) => {
 })
 
 blogsRouter.post('/', async (request, response, next) => {
-  const cToken = getToken(request);
-  
   try {
-    const token = cToken? await jwt.verify(cToken, process.env.SECRET) : null;
-  
-    if ( !token || !token.id) {
-      return response.status(401).json({error: 'Invalid token'})
+    const user = request.user;
+    if (!user) {
+      return response.status(401).json({error: 'Authorization error'})
     }
-    
-    const user = await User.findById(token.id) ;
-  
     const blog = new Blog({
       title: request.body.title,
       author: request.body.author,
@@ -66,7 +52,18 @@ blogsRouter.post('/', async (request, response, next) => {
 })
 
 blogsRouter.delete('/:id', async (request, response, next) => {
+  const user = request.user;
+  if (!user) {
+    return response.status(401).json({error: 'delete: Authorization error'})
+  }
   try {
+    const blog = await Blog.findById(request.params.id);
+    if ( !blog) {
+      return response.status(400).json({error: `Blog id ${request.params.id} does not exist`})
+    }
+    if ( blog.user.toString() !== user._id.toString()) {
+      return response.status(401).json({error: `Wrong user`})
+    }
     await Blog.findByIdAndRemove(request.params.id);
     response.status(204).end();
   } catch (exception) {
