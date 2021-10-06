@@ -10,6 +10,7 @@ const requestLogger = (request, response, next) => {
 
 const tokenExtractor = ( request, response, next) => {
     const authorization = request.get('authorization');
+    //console.log('-- tokenExtractor --', authorization);
     if ( authorization && authorization.toLowerCase().startsWith('bearer ')) {
       request.token = authorization.substring(7);
     } else {
@@ -20,13 +21,13 @@ const tokenExtractor = ( request, response, next) => {
 
 const userExtractor = async (request, response, next) => {
   request.user = null;
-  //console.log('-- userExtr --');
+  //console.log('-- userExtr --', request.token);
   if ( !request.token ) {
     //console.log('-- userExtr no token --');
     return next();
   }
   try {
-    //console.log('-- userExtr -- 11');
+    //console.log('-- userExtr -- 11', request.token );
     decodedToken = jwt.verify(request.token, process.env.SECRET);
     //console.log('-- userExtr -- 22');
     if ( decodedToken && decodedToken.id ) { 

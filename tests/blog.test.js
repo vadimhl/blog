@@ -5,10 +5,18 @@ const Blog = require('../models/blog');
 const User = require('../models/user');
 const helper = require('./test_helper');
 const api = supertest(app);
-let userId ;
+let user;
+let auth;
+beforeAll( async () => {
+  user = await User.findOne({});
+  const loginResponse = await  api.post('/api/login/')
+                                  .send({username: 'root', password: '123456'})
+                                  .expect(200);
+  auth = loginResponse.body.token;
+  //console.log('loginResponse', loginResponse);
+})
 describe( 'blog list',  () => {
   beforeEach( async () => {
-    const user = await User.findOne({});
     await Blog.deleteMany({});
     const blogObjects = helper.testBlogs.map ( blog => new Blog({...blog, user: user._id}));
     const promiseArr = blogObjects.map( bo => bo.save() );
@@ -30,6 +38,7 @@ describe( 'blog list',  () => {
   test ( 'post', async () => {
     const newBlog = await api
       .post('/api/blogs')
+      .set({ Authorization: 'Bearer ' + auth })
       .send(
         {
           title: "ForTest",
@@ -57,6 +66,7 @@ describe( 'blog list',  () => {
   test ('likes', async () =>{
     const newBlog = await api
       .post('/api/blogs')
+      .set({ Authorization: 'Bearer ' + auth })      
       .send(
         {
           title: "ForTest",
@@ -72,6 +82,7 @@ describe( 'blog list',  () => {
   test ( 'title', async () => {
     await api
       .post('/api/blogs')
+      .set({ Authorization: 'Bearer ' + auth })
       .send(
         {
           author: "Test ttt",
@@ -84,6 +95,7 @@ describe( 'blog list',  () => {
   test ( 'url', async () => {
     await api
       .post('/api/blogs')
+      .set({ Authorization: 'Bearer ' + auth })
       .send(
         {
           author: "Test ttt",
@@ -105,6 +117,7 @@ describe( 'blog list',  () => {
   test ('delete', async () => {
     await api
       .delete('/api/blogs/5a422b3a1b54a676234d17f9')
+      .set({ Authorization: 'Bearer ' + auth })
       .expect(204);
     const response = await api.get('/api/blogs');
     expect(response.body.length).toBe(helper.testBlogs.length-1);
