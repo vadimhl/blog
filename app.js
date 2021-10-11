@@ -22,7 +22,12 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
   })
 
 
-app.use(cors())
+const corsOptions = {
+  origin: (origin, callback)=>{  callback(null, true)    },
+  credentials: true
+}
+app.use(cors( corsOptions ));
+
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)

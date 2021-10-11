@@ -105,6 +105,19 @@ describe( 'blog list',  () => {
       )
       .expect(400);
   })  
+  test( 'no auth', async () => {
+    await api
+      .post('/api/blogs')
+      .send(
+        {
+          author: "Test no auth",
+          title: "no auth",
+          url: "127.0.0.1",
+          likes: 666
+        }
+      )
+      .expect(401);
+  })
   test('put', async () => {
     const resp1 = await api.get('/api/blogs/5a422b3a1b54a676234d17f9');
     await api
