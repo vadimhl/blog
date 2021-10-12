@@ -1,9 +1,9 @@
 import axios from 'axios'
-const baseUrl = 'https://3001-copper-peacock-recgkxr0.ws-eu18.gitpod.io/api/blogs'
+import config  from '../utils/config';
 
 axios.defaults.withCredentials = true;
 const getAll = () => {
-  const request = axios.get(baseUrl)
+  const request = axios.get(config.baseUrl+'/api/blogs')
   return request.then(response => response.data)
 }
 const blogService = { getAll }

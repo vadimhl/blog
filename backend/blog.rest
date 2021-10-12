@@ -1,10 +1,12 @@
 #@host = blog.1vadimhladchenko.repl.co
 @host = 3001-copper-peacock-recgkxr0.ws-eu18.gitpod.io
-@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_b1998803-eb61-4d61-b1d3-3eedd81f7881_owner_=a8j7R9NfS2SVmcVFps3zqrjhHOciN7lO; _gitpod_io_ws_61425441-b7f4-4e8f-9162-64696e784f58_owner_=QwKJGNhY59TaqY.1lZ0fUh3JZUEkO.tV; _gitpod_io_ws_60e5e4cb-83db-4224-97ea-df275374fca6_owner_=JZsGhe4MqwXK.9LvpB7fyNE4nPu7YGch; _gitpod_io_ws_dc73f1ae-e272-4e0e-8b94-6f62a34ab431_owner_=xHxvag3hTFPtd.3mLPP5c_jT3BXvcsKP; _gitpod_io_ws_4437668f-603a-4b3b-a9e7-2781aa93f3f1_owner_=4CU9kxirjUFdOq7IjsjqFpFBRTS06HD5; _gitpod_io_ws_7c807f57-d8e6-4f00-89c6-775c3ce1d4f5_owner_=AuhadkyH5wZAM-XYiL_h1s-jegZuapv6; _gitpod_io_ws_02d59418-8fe4-4f0e-aaef-1a6861fe933f_owner_=xhimgcrHlW0sz9.OMca225cF2aMQbviH; _gitpod_io_ws_8d320703-1ba6-467b-88da-15ca7315ecdd_owner_=CwV0LPIdEJl4UHIw81ISuGPoiJF5j1f9
+@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_60e5e4cb-83db-4224-97ea-df275374fca6_owner_=JZsGhe4MqwXK.9LvpB7fyNE4nPu7YGch; _gitpod_io_ws_dc73f1ae-e272-4e0e-8b94-6f62a34ab431_owner_=xHxvag3hTFPtd.3mLPP5c_jT3BXvcsKP; _gitpod_io_ws_4437668f-603a-4b3b-a9e7-2781aa93f3f1_owner_=4CU9kxirjUFdOq7IjsjqFpFBRTS06HD5; _gitpod_io_ws_7c807f57-d8e6-4f00-89c6-775c3ce1d4f5_owner_=AuhadkyH5wZAM-XYiL_h1s-jegZuapv6; _gitpod_io_ws_02d59418-8fe4-4f0e-aaef-1a6861fe933f_owner_=xhimgcrHlW0sz9.OMca225cF2aMQbviH; _gitpod_io_ws_8d320703-1ba6-467b-88da-15ca7315ecdd_owner_=CwV0LPIdEJl4UHIw81ISuGPoiJF5j1f9; _gitpod_io_ws_cb407129-784f-4b0b-a517-0ac5a7f1d720_owner_=kGfoj4UYz2oEfdUEi6g1JAP5UobtdvOF; _gitpod_io_ws_a7551248-7f25-49fa-8dfa-79d8f2d7fc03_owner_=rccXxVxwA1IiPD5mTSyB435AtclmhsIM; _gitpod_io_ws_bcfa52c7-b11e-4902-8f23-749712a48a4c_owner_=A9VsqBG_T6NOW-Y4_yaNENB0jgNn2JVO
 
 @auth_user = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNWFmODM3MjU4OGVmYjg2ZDI0NDdmYSIsImlhdCI6MTYzMzUyMzUwN30.VKKboQk9JPyaFXbULpYEDW5bEo8pM6L6uWAL6nRTEj8
 @auth_root = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYxNWQ2YWY0ODBiNzJiNmIxZjdkYWZmNiIsImlhdCI6MTYzMzUyNDk4OX0.JPAnfRCQ3_cAUIJz83Q4aREObLJ2sftdT9HSnj8sek8
 
+###
+GET http://localhost:3001/api/users/
 ###
 GET https://{{host}}/api/blogs/
 cookie: {{cookie}}
