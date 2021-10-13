@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import Logout from './components/logout'
+import CreateNew from './components/createNew'
 import LoginForm from './components/loginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -46,6 +47,10 @@ const App = () => {
         setMessage({text:'wrong login or password', color: 'red', time: 5000 });
     }
   }
+  const addBlog = async (blog) => {
+ 
+    console.log('blog to add: ', blog);
+  }
   const handleLogout = async (event) => {
     event.preventDefault();
     setUser(null);
@@ -69,8 +74,9 @@ const App = () => {
         <Message message={message} setMessage={setMessage} />
         { user?
           <div>
-            <Logout user={user} handleLogout={handleLogout}/>
             <h2>blogs</h2>
+            <Logout user={user} handleLogout={handleLogout}/>
+            <CreateNew addBlog={addBlog} />
             {blogs.map(blog => <Blog key={blog.id} blog={blog} /> )}
           </div>  
           :
