@@ -47,10 +47,19 @@ const App = () => {
         setMessage({text:'wrong login or password', color: 'red', time: 5000 });
     }
   }
+
   const addBlog = async (blog) => {
- 
     console.log('blog to add: ', blog);
+    const response = await blogService.create(blog)
+    console.log('blog add', response)
+    if (!response.error) {
+      setBlogs(blogs.concat(response))
+      setMessage({ text: `Blog ${response.title} added` , color: 'green', time: 3000 })
+    } else {
+      setMessage({ text: 'Error creating blog -' +response.error, color: 'red', time: 5000 })
+    }
   }
+
   const handleLogout = async (event) => {
     event.preventDefault();
     setUser(null);

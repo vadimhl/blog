@@ -33,7 +33,7 @@ blogsRouter.get('/:id', async (request, response, next) => {
 blogsRouter.post('/', async (request, response, next) => {
   try {
     const user = request.user;
-    //console.log('-- post user --', user);
+    console.log('-- post user --', user);
     if (!user) {
       return response.status(401).json({error: 'Authorization error'})
     }
