@@ -1,5 +1,5 @@
 const config = {
-    baseUrl:  'https://3001-copper-peacock-recgkxr0.ws-eu18.gitpod.io'
+    baseUrl:  'http://130.61.49.110:3001'
 }
 
 export default config;
