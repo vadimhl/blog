@@ -6,6 +6,7 @@ import LoginForm from './components/loginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Message from './components/message'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -69,13 +70,15 @@ const App = () => {
     window.localStorage.removeItem('loggedUser')
   }
   const loginForm = () => {
-    return <LoginForm  
-      username={username}
-      setUsername={setUsername}
-      password={password}
-      setPassword={setPassword}
-      handleLogin={handleLogin}
-    /> 
+    return (
+      <LoginForm  
+        username={username}
+        setUsername={setUsername}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+      /> 
+    )
   }
 
   return (
@@ -85,7 +88,9 @@ const App = () => {
           <div>
             <h2>blogs</h2>
             <Logout user={user} handleLogout={handleLogout}/>
-            <CreateNew addBlog={addBlog} />
+            <Togglable buttonLabel='Create new'>
+              <CreateNew addBlog={addBlog} />  
+            </Togglable>
             {blogs.map(blog => <Blog key={blog.id} blog={blog} /> )}
           </div>  
           :
