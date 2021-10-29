@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 //import blogService from '../services/blogs'
 
-const Blog = ({blog, addLike}) => {
+const Blog = ({blog, addLike, remove}) => {
   const [showDetail, setShowDetail] = useState(false);
   const blogStyle = {
     paddingTop: 10,
@@ -19,6 +19,7 @@ const Blog = ({blog, addLike}) => {
         {blog.author}<br /> 
         blog id {blog.id} <br /> 
         user id {blog.user.id}<br /> 
+        <button onClick = { () => remove( blog ) }>Remove</button> <br /> 
       </div>  
     )
   } else {

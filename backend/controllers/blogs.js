@@ -57,6 +57,7 @@ blogsRouter.post('/', async (request, response, next) => {
 
 blogsRouter.delete('/:id', async (request, response, next) => {
   const user = request.user;
+  console.log('-- delete user --', user);
   if (!user) {
     return response.status(401).json({error: 'delete: Authorization error'})
   }
@@ -82,7 +83,7 @@ blogsRouter.put('/:id',  async (request, response, next) => {
     author: request.body.author,
     url: request.body.url,
     likes: request.body.likes || 0,
-    user: users[0]._id,
+    user: request.body.user.id || users[0]._id,
   }
   
   try {
