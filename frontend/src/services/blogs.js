@@ -26,6 +26,16 @@ const create = async (blog) => {
   }
 }
 
-const blogService = { getAll, create, setToken }
+const update = async (blog) => {
+  try {
+    const response = await axios.put(config.baseUrl+'/api/blogs/'+blog.id, blog, {headers: {Authorization: token}});
+    //console.log('post ok:', response.data)
+    return response.data
+  } catch (exception){
+    //console.log('post err:', exception.response.data)
+    return exception.response.data
+  }
+}
+const blogService = { getAll, create, setToken, update }
 
 export default blogService

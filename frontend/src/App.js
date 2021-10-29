@@ -60,6 +60,22 @@ const App = () => {
       setMessage({ text: 'Error creating blog -' +response.error, color: 'red', time: 5000 })
     }
   }
+  const addLike = async (blog) => {
+    try {
+      const response = await blogService.update({...blog, likes:blog.likes+1})
+      //console.log(response)
+      if (!response.error) {
+        setBlogs(blogs.map(  b=> b.id===response.id? response: b ) );
+        //console.log(blogs);
+        //console.log(response)
+        //setMessage({ text: `like to blog ${response.title} added` , color: 'green', time: 3000 })
+      } else {
+        setMessage({ text: 'Error updating blog -' +response.error, color: 'red', time: 5000 })
+      }
+    } catch ( e ) {
+      setMessage({ text: 'Error updating blog -' +e, color: 'red', time: 5000 })
+    }
+  };
 
   const handleLogout = async (event) => {
     event.preventDefault();
@@ -69,6 +85,7 @@ const App = () => {
     setPassword('');
     window.localStorage.removeItem('loggedUser')
   }
+
   const loginForm = () => {
     return (
       <LoginForm  
@@ -91,7 +108,7 @@ const App = () => {
             <Togglable buttonLabel='Create new'>
               <CreateNew addBlog={addBlog} />  
             </Togglable>
-            {blogs.map(blog => <Blog key={blog.id} blog={blog} /> )}
+            {blogs.map(blog => <Blog key={blog.id} blog={blog} addLike={addLike}/> )}
           </div>  
           :
           loginForm()
