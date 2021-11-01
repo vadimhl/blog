@@ -1,5 +1,5 @@
 const config = {
-    baseUrl:  'http://130.61.49.110:3001'
+  baseUrl:  'http://130.61.49.110:3001'
 }
 
-export default config;
+export default config
