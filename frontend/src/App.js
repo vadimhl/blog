@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import Logout from './components/logout'
 import CreateNew from './components/createNew'
@@ -14,6 +14,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const createNewRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -51,6 +52,7 @@ const App = () => {
   const addBlog = async (blog) => {
     const response = await blogService.create(blog)
     if (!response.error) {
+      createNewRef.current.toggleVisible()
       //setBlogs(blogs.concat(response))
       setBlogs( await blogService.getAll() )
       setMessage({ text: `Blog ${response.title} added` , color: 'green', time: 3000 })
@@ -115,7 +117,7 @@ const App = () => {
         <div>
           <h2>blogs</h2>
           <Logout user={user} handleLogout={handleLogout}/>
-          <Togglable buttonLabel='Create new'>
+          <Togglable buttonLabel='Create new' ref={ createNewRef }>
             <CreateNew addBlog={addBlog} />
           </Togglable>
           {blogs.sort((a,b) => b.likes-a.likes ).map(blog => <Blog key={blog.id} blog={blog} addLike={addLike} remove={remove}/> )}
