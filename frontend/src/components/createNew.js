@@ -22,18 +22,20 @@ const CreateNew = ( { addBlog } ) => {
     addBlog({ title, author, url })
   }
   return (
-    <form onSubmit={handleCreate} >
-      <div>
-        title:<input type="text" value={title} name="title" onChange={titleChange}/>
-      </div>
-      <div>
-        author:<input type="text" value={author} name="author" onChange={authorChange} />
-      </div>
-      <div>
-        url:<input type="text" value={url} name="url"  onChange={urlChange}/>
-      </div>
-      <button type="submit">Create</button>
-    </form>
+    <div className="formDiv">
+      <form onSubmit={handleCreate} >
+        <div>
+          title:<input id="title" type="text" value={title} name="title" onChange={titleChange}/>
+        </div>
+        <div>
+          author:<input id="author" type="text" value={author} name="author" onChange={authorChange} />
+        </div>
+        <div>
+          url:<input id="url" type="text" value={url} name="url"  onChange={urlChange}/>
+        </div>
+        <button id="submit" type="submit">Create</button>
+      </form>
+    </div>
   )
 }
 
