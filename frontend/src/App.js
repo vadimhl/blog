@@ -113,9 +113,9 @@ const App = () => {
   return (
     <div>
       <Message message={message} setMessage={setMessage} />
+      <h2>blogs</h2>
       { user?
         <div>
-          <h2>blogs</h2>
           <Logout user={user} handleLogout={handleLogout}/>
           <Togglable buttonLabel='Create new' ref={ createNewRef }>
             <CreateNew addBlog={addBlog} />

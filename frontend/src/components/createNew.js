@@ -33,7 +33,7 @@ const CreateNew = ( { addBlog } ) => {
         <div>
           url:<input id="url" type="text" value={url} name="url"  onChange={urlChange}/>
         </div>
-        <button id="submit" type="submit">Create</button>
+        <button  type="submit" id="create-button">Create</button>
       </form>
     </div>
   )
