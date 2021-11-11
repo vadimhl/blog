@@ -27,7 +27,7 @@ const corsOptions = {
   credentials: true
 }
 app.use(cors( corsOptions ));
-
+app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)

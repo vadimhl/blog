@@ -21,7 +21,7 @@ const CreateNew = ( { addBlog } ) => {
     event.preventDefault()
     addBlog({ title, author, url })
   }
-  
+
   return (
     <div className="formDiv">
       <form onSubmit={handleCreate} >
