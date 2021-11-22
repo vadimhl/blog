@@ -12,11 +12,11 @@ const Message = ({ message, setMessage }) => {
       padding: 10,
       marginBottom: 10,
     }
-    if (time) {
+    if (time ) {
       setTimeout(() => { setMessage({ text: '', color: 'gray', time: 0 }) }, time)
     }
     return (
-      <div style={style}>
+      <div className="Message" style={style}>
         {text}
       </div>
     )

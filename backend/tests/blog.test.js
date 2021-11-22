@@ -122,6 +122,7 @@ describe( 'blog list',  () => {
     const resp1 = await api.get('/api/blogs/5a422b3a1b54a676234d17f9');
     await api
       .put('/api/blogs/5a422b3a1b54a676234d17f9')
+      .set({ Authorization: 'Bearer ' + auth })
       .send( { likes: resp1.body.likes + 1 } )
       .expect(200)
     const resp2 = await api.get('/api/blogs/5a422b3a1b54a676234d17f9');

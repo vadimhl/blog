@@ -36,7 +36,7 @@ const App = () => {
     try {
       const loggedUser = await loginService.login({ username, password })
       console.log('login user:', loggedUser)
-      setMessage({ text:'logded as'+loggedUser.name, color: 'green', time: 3000 })
+      setMessage({ text:loggedUser.username+' logged in', color: 'green', time: 5000 })
       window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser))
       setUser(loggedUser)
       blogService.setToken(loggedUser.token)
@@ -45,7 +45,7 @@ const App = () => {
     } catch (exception) {
       console.log('exception', exception)
       blogService.setToken(null)
-      setMessage({ text:'wrong login or password', color: 'red', time: 5000 })
+      setMessage({ text:'wrong username or password', color: 'red', time: 3000 })
     }
   }
 
@@ -63,7 +63,8 @@ const App = () => {
 
   const addLike = async (blog) => {
     try {
-      const response = await blogService.update({ ...blog, likes:blog.likes+1 })
+      //const response = await blogService.update({ ...blog, likes:blog.likes+1 })
+      const response = await blogService.like(blog)
       if (!response.error) {
         setBlogs(blogs.map(  b => b.id===response.id? response: b ) )
       } else {
@@ -82,10 +83,10 @@ const App = () => {
         setBlogs(blogs.filter(  b => b.id !== blog.id) )
         setMessage({ text: `blog ${blog.title} removed` , color: 'green', time: 3000 })
       } else {
-        setMessage({ text: 'Error deleting blog -' +response.error, color: 'red', time: 5000 })
+        setMessage({ text: 'Error deleting blog - ' +response.error, color: 'red', time: 5000 })
       }
     } catch ( e ) {
-      setMessage({ text: 'Error deleting blog -' +e.response, color: 'red', time: 5000 })
+      setMessage({ text: 'Error deleting blog - ' +e.response, color: 'red', time: 5000 })
     }
   }
 

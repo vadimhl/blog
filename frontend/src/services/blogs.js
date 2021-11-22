@@ -26,6 +26,17 @@ const create = async (blog) => {
   }
 }
 
+const like = async (blog) => {
+  try {
+    const response = await axios.put(config.baseUrl+'/api/blogs/like/'+blog.id)
+    //console.log('put like ok:', response.data)
+    return response.data
+  } catch (exception){
+    //console.log('put like err:', exception.response.data)
+    return exception.response.data
+  }
+}
+
 const update = async (blog) => {
   try {
     const response = await axios.put(config.baseUrl+'/api/blogs/'+blog.id, blog, { headers: { Authorization: token } })
@@ -48,6 +59,6 @@ const remove = async (blog) => {
   }
 }
 
-const blogService = { getAll, create, setToken, update, remove }
+const blogService = { getAll, create, setToken, update, remove, like }
 
 export default blogService

@@ -6,8 +6,6 @@ const jwt = require('jsonwebtoken');
 
 
 blogsRouter.get('/', async (request, response, next) => {
-  const user = request.user;
-  console.log('-- get user --', user);
 
   try {
     const blogs = await Blog.find({}).populate('user', {name: 1, username:1});
@@ -75,19 +73,48 @@ blogsRouter.delete('/:id', async (request, response, next) => {
     next(exception)
   }
 })
-blogsRouter.put('/:id',  async (request, response, next) => {
-  const users = await User.find({}) ;
 
-  const blog = {
+blogsRouter.put('/like/:id',  async (request, response, next) => {
+  try {
+    const blog = await Blog.findById(request.params.id);
+    if ( !blog ) {
+      return response.status(404).json({error: `Blog id ${request.params.id} does not exist`}).end(); 
+    }
+    blog.likes++
+    const updBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true }).populate('user', {name: 1, username:1}); 
+    response.json(updBlog);
+  } catch (exception) {
+    next(exception);
+  } 
+})
+blogsRouter.put('/:id',  async (request, response, next) => {
+  const user = request.user;
+  console.log('-- put user --', user);
+  if (!user) {
+    return response.status(401).json({error: 'put: Authorization error'})
+  }  
+  const blog = await Blog.findById(request.params.id);
+  //console.log('-- blog ---', blog);
+  if ( !blog ) {
+    return response.status(404).json({error: `Blog id ${request.params.id} does not exist`}).end(); 
+  }
+  if ( blog.user.toString() !== user._id.toString()) {
+    return response.status(401).json({error: `Wrong user`})
+  }
+
+  //const users = await User.find({}) ;
+
+  const newBlog = {
     title: request.body.title,
     author: request.body.author,
     url: request.body.url,
     likes: request.body.likes || 0,
-    user: request.body.user.id || users[0]._id,
+    user: request.body?.user?.id //|| users[0]._id,
   }
-  
+  //console.log('-- newblog ---', newBlog);
   try {
-    const updBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true }).populate('user', {name: 1, username:1}); 
+    const updBlog = await Blog.findByIdAndUpdate(request.params.id, newBlog, { new: true }).populate('user', {name: 1, username:1}); 
+    //console.log('-- updblog ---', updBlog);
     response.json(updBlog);
   } catch (exception) {
     next(exception);

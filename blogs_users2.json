@@ -1,0 +1,2 @@
+{"_id":{"$oid":"616429462f9d11ad19aadf55"},"username":"root","passwordHash":"$2b$10$ygCqCIbedqIlWvcTRcxtzOrlelZQYaQJbDOmvDVsIzARsS99633DG","name":"name root","blogs":[{"$oid":"618d24f91f0553fc7ea0b94e"},{"$oid":"618d25471f0553fc7ea0b95f"},{"$oid":"618d2dd1b6a4b58a3753b270"}],"__v":3}
+{"_id":{"$oid":"6192603a6ab55aacdce6e619"},"username":"root1","passwordHash":"$2b$10$dMERNLlw0BzOukTSuuARtOl0HQZWBCnJEunS5x3t9mMV73Go.ilvi","name":"Super user","blogs":[],"__v":0}
