@@ -1,0 +1,4 @@
+{
+  "proxy": "http://proxyf.hq.eximb.com:3128",
+  "rejectUnauthorized": false
+}

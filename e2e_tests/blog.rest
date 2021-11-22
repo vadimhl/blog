@@ -1,0 +1,89 @@
+#@host = blog.1vadimhladchenko.repl.co
+#@host = 3001-copper-peacock-recgkxr0.ws-eu18.gitpod.io
+@host = 130.61.49.110:3001
+130.61.49.110:3001
+@cookie = _gitpod_io_=s:55c0c7b1-c3f0-4f82-bf45-8b5f9196041d.Qh73rZH0wd0QKQpzAjNvLo0b0KLBNPGyb+5GYa1If6Q; gitpod-user=loggedIn; _gitpod_io_ws_60e5e4cb-83db-4224-97ea-df275374fca6_owner_=JZsGhe4MqwXK.9LvpB7fyNE4nPu7YGch; _gitpod_io_ws_dc73f1ae-e272-4e0e-8b94-6f62a34ab431_owner_=xHxvag3hTFPtd.3mLPP5c_jT3BXvcsKP; _gitpod_io_ws_4437668f-603a-4b3b-a9e7-2781aa93f3f1_owner_=4CU9kxirjUFdOq7IjsjqFpFBRTS06HD5; _gitpod_io_ws_7c807f57-d8e6-4f00-89c6-775c3ce1d4f5_owner_=AuhadkyH5wZAM-XYiL_h1s-jegZuapv6; _gitpod_io_ws_02d59418-8fe4-4f0e-aaef-1a6861fe933f_owner_=xhimgcrHlW0sz9.OMca225cF2aMQbviH; _gitpod_io_ws_8d320703-1ba6-467b-88da-15ca7315ecdd_owner_=CwV0LPIdEJl4UHIw81ISuGPoiJF5j1f9; _gitpod_io_ws_cb407129-784f-4b0b-a517-0ac5a7f1d720_owner_=kGfoj4UYz2oEfdUEi6g1JAP5UobtdvOF; _gitpod_io_ws_a7551248-7f25-49fa-8dfa-79d8f2d7fc03_owner_=rccXxVxwA1IiPD5mTSyB435AtclmhsIM; _gitpod_io_ws_bcfa52c7-b11e-4902-8f23-749712a48a4c_owner_=A9VsqBG_T6NOW-Y4_yaNENB0jgNn2JVO
+
+@auth_user = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjYxNWFmODM3MjU4OGVmYjg2ZDI0NDdmYSIsImlhdCI6MTYzMzUyMzUwN30.VKKboQk9JPyaFXbULpYEDW5bEo8pM6L6uWAL6nRTEj8
+@auth_root = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYxOTUxMjM2ODNiN2Y3YWQ0ZWY5MTk4MiIsImlhdCI6MTYzNzE2MTQxM30.eQZTPIh5-CWI5GPTKZp_GgFTqeYvON6Ibjsfau4NkAA
+//           
+###
+GET http://{{host}}/api/users/
+###
+GET http://{{host}}/api/blogs/
+###
+cookie: {{cookie}}
+###
+GET https://{{host}}/api/users/
+cookie: {{cookie}}
+###
+POST http://{{host}}/api/blogs/
+Content-Type: application/json
+Authorization: Bearer {{auth_root}}
+
+{
+  "title": "Test Authorization error",
+  "author": "Root",
+  "url": "127.0.0.52",
+  "likes": 1
+}
+
+###
+GET https://{{host}}/api/blogs/w61547aadd8c80c69a748e944
+###
+POST https://{{host}}/api/blogs/
+Content-Type: application/json
+Auth1orization: Bearer {{auth_root}}
+cookie: {{cookie}}
+
+{
+  "title": "Test Authorization error",
+  "author": "Root",
+  "url": "127.0.0.52",
+  "likes": 1
+}
+
+###
+PUT https://{{host}}/api/blogs/615571b043352a3550187f3e
+Content-Type: application/json
+cookie: {{cookie}}
+Auth1orization: Bearer {{auth_user}}
+
+{
+
+  "likes": "1"
+}
+###
+POST https://{{host}}/api/users/
+Content-Type: application/json
+cookie: {{cookie}}
+
+{
+  "username": "root",
+  "name": "Super user",
+  "password": "qazwsx"
+}
+###
+DELETE https://{{host}}/api/blogs/615d8fa9f2a52f21af53d96b
+cookie: {{cookie}}
+Authorization: Bearer {{auth_root}}
+
+###
+POST http://{{host}}/api/login/
+Content-Type: application/json
+
+{
+  "username" : "root",
+  "password" : "qazwsx"
+}
+###
+POST https://{{host}}/api/login/
+Content-Type: application/json
+cookie: {{cookie}}
+
+{
+  "username": "root",
+  "password": "qazwsx"
+}
+###
+POST http://{{host}}/api/testing/reset
